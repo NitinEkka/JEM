@@ -13,10 +13,16 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
 from django.contrib import admin
 from django.urls import path, include
+
+from jemproject.jemproject.settings import STATIC_URL
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/', include('jemapp.urls'))
 ]
+
+urlpatterns += STATIC_URL(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+urlpatterns += STATIC_URL(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
